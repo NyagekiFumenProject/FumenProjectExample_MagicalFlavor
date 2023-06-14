@@ -1,0 +1,46 @@
+{
+  "Version": "0.5.2",
+  "Id": "2980d752-3a0d-420c-8378-2ba25b1a73d0",
+  "AudioFilePath": "DECO-27-Tia-Magical-Flavor.wav",
+  "AudioDuration": {
+    "Ticks": 1275733333
+  },
+  "EditorSetting": {
+    "JudgeLineOffsetY": 50,
+    "DisableXGridMagneticDock": false,
+    "ForceMagneticDock": true,
+    "ForceTapHoldMagneticDockToLane": false,
+    "JudgeLineAlignBeat": false,
+    "DisableTGridMagneticDock": false,
+    "XGridUnitSpace": 4,
+    "TGridUnitLength": 240,
+    "BeatSplit": 2,
+    "XGridDisplayMaxUnit": 24,
+    "ForceXGridMagneticDock": false,
+    "VerticalDisplayScale": 0.75,
+    "MouseWheelLength": 50,
+    "DisplayTimeFormat": 0,
+    "IsNotifying": true
+  },
+  "FumenFilePath": "fumen.ogkr",
+  "RememberLastDisplayTime": {
+    "Ticks": 937308673
+  },
+  "StoreBulletPalleteEditorDatas": {
+    "A0": {
+      "Name": "\u5360\u4F4D",
+      "AuxiliaryLineColor": {
+        "ColorContext": null,
+        "A": 255,
+        "R": 189,
+        "G": 183,
+        "B": 107,
+        "ScA": 1,
+        "ScR": 0.50888133,
+        "ScG": 0.4735315,
+        "ScB": 0.14702727
+      }
+    }
+  },
+  "IsNotifying": true
+}
