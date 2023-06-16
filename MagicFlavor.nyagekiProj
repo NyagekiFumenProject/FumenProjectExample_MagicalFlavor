@@ -6,29 +6,43 @@
     "Ticks": 1275733333
   },
   "EditorSetting": {
-    "JudgeLineOffsetY": 50,
-    "DisableXGridMagneticDock": false,
-    "ForceMagneticDock": true,
-    "ForceTapHoldMagneticDockToLane": false,
-    "JudgeLineAlignBeat": false,
     "DisableTGridMagneticDock": false,
-    "XGridUnitSpace": 4,
-    "TGridUnitLength": 240,
-    "BeatSplit": 2,
-    "XGridDisplayMaxUnit": 24,
     "ForceXGridMagneticDock": false,
+    "DisableXGridMagneticDock": false,
+    "ForceTapHoldMagneticDockToLane": false,
+    "ForceMagneticDock": true,
+    "JudgeLineAlignBeat": false,
+    "XGridUnitSpace": 3,
+    "TGridUnitLength": 240,
+    "BeatSplit": 4,
+    "XGridDisplayMaxUnit": 40,
+    "JudgeLineOffsetY": 75,
     "VerticalDisplayScale": 0.75,
-    "MouseWheelLength": 50,
     "DisplayTimeFormat": 0,
+    "MouseWheelLength": 50,
     "IsNotifying": true
   },
   "FumenFilePath": "fumen.ogkr",
   "RememberLastDisplayTime": {
-    "Ticks": 937308673
+    "Ticks": 936670918
   },
   "StoreBulletPalleteEditorDatas": {
     "A0": {
       "Name": "\u5360\u4F4D",
+      "AuxiliaryLineColor": {
+        "ColorContext": null,
+        "A": 255,
+        "R": 189,
+        "G": 183,
+        "B": 107,
+        "ScA": 1,
+        "ScR": 0.50888133,
+        "ScG": 0.4735315,
+        "ScB": 0.14702727
+      }
+    },
+    "A1": {
+      "Name": "",
       "AuxiliaryLineColor": {
         "ColorContext": null,
         "A": 255,
