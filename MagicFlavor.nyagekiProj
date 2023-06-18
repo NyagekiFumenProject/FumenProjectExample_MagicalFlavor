@@ -14,7 +14,7 @@
     "JudgeLineAlignBeat": false,
     "XGridUnitSpace": 3,
     "TGridUnitLength": 240,
-    "BeatSplit": 4,
+    "BeatSplit": 5,
     "XGridDisplayMaxUnit": 40,
     "JudgeLineOffsetY": 75,
     "VerticalDisplayScale": 0.75,
@@ -24,7 +24,7 @@
   },
   "FumenFilePath": "fumen.ogkr",
   "RememberLastDisplayTime": {
-    "Ticks": 936670918
+    "Ticks": 542015306
   },
   "StoreBulletPalleteEditorDatas": {
     "A0": {
