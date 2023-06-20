@@ -12,9 +12,9 @@
     "ForceTapHoldMagneticDockToLane": false,
     "ForceMagneticDock": true,
     "JudgeLineAlignBeat": false,
-    "XGridUnitSpace": 3,
+    "XGridUnitSpace": 1,
     "TGridUnitLength": 240,
-    "BeatSplit": 5,
+    "BeatSplit": 4,
     "XGridDisplayMaxUnit": 40,
     "JudgeLineOffsetY": 75,
     "VerticalDisplayScale": 0.75,
@@ -24,7 +24,7 @@
   },
   "FumenFilePath": "fumen.ogkr",
   "RememberLastDisplayTime": {
-    "Ticks": 542015306
+    "Ticks": 607219387
   },
   "StoreBulletPalleteEditorDatas": {
     "A0": {

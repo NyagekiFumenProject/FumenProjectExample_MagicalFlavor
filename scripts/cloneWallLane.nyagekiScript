@@ -1,0 +1,111 @@
+using OngekiFumenEditor.Base;
+using OngekiFumenEditor.Base.OngekiObjects;
+using System.Linq;
+using OngekiFumenEditorPlugins.EditorScriptExecutor.Scripts;
+using OngekiFumenEditor.Base.OngekiObjects.Lane;
+using OngekiFumenEditor.Base.OngekiObjects.Wall;
+using OngekiFumenEditor.Base.OngekiObjects.ConnectableObject;
+using OngekiFumenEditor.Base.EditorObjects.LaneCurve;
+using OngekiFumenEditor.Utils;
+using OngekiFumenEditor.Modules.FumenVisualEditor.Base;
+using System.Collections.Generic;
+using System.Diagnostics;
+
+var sourceLaneGroupIds = new[] { 82, 83 };
+var genLaneType = LaneType.Colorful;
+var colorId = ColorIdConst.Yuzu;
+var brightness = 3;
+var startTGrid = new TGrid(36, 960);
+var stopTGrid = new TGrid(37, 0);
+var xGridOffsets = new GridOffset[] {
+        new(-1, 0),
+        new(0, 0),
+        new(1, 0),
+};
+
+//获取编辑器目标对象
+var targetEditor = ScriptArgs.TargetEditor;
+if (targetEditor is null)
+    return;
+
+List<ConnectableStartObject> genList = new();
+
+foreach (var sourceLaneGroupId in sourceLaneGroupIds)
+{
+    if (targetEditor.Fumen.Lanes.FirstOrDefault(x => x.RecordId == sourceLaneGroupId) is not ConnectableStartObject sourceLaneStart)
+        return;
+
+    //generate and setup new lane.
+    foreach (var xGridOffset in xGridOffsets)
+    {
+        void CopyCommon(ConnectableObjectBase s, ConnectableObjectBase t)
+        {
+            t.TGrid = s.TGrid;
+            t.XGrid = s.XGrid + xGridOffset;
+
+            if (t is IColorfulLane tc)
+            {
+                tc.ColorId = colorId;
+                tc.Brightness = brightness;
+            }
+        }
+
+        void CopyChild(ConnectableChildObjectBase s, ConnectableChildObjectBase t)
+        {
+            CopyCommon(s, t);
+
+            t.CurveInterpolaterFactory = s.CurveInterpolaterFactory;
+            t.CurvePrecision = s.CurvePrecision;
+            foreach (var ctrl in s.PathControls)
+            {
+                var cp = (LaneCurvePathControlObject)ctrl.CopyNew();
+                cp.TGrid = cp.TGrid;
+                cp.XGrid = cp.XGrid + xGridOffset;
+                t.AddControlObject(cp);
+            }
+        }
+
+        ConnectableStartObject targetLaneStart = genLaneType switch
+        {
+            LaneType.Left => new LaneLeftStart(),
+            LaneType.Center => new LaneCenterStart(),
+            LaneType.Right => new LaneRightStart(),
+            LaneType.Colorful => new ColorfulLaneStart(),
+            LaneType.Enemy => new EnemyLaneStart(),
+            LaneType.WallLeft => new WallLeftStart(),
+            LaneType.WallRight => new WallRightStart(),
+            _ => default
+        };
+
+        CopyCommon(sourceLaneStart, targetLaneStart);
+        targetLaneStart.TGrid = startTGrid;
+        targetLaneStart.XGrid = sourceLaneStart.CalulateXGrid(startTGrid)+xGridOffset;
+
+        foreach (var child in sourceLaneStart.Children)
+        {
+            if (child.TGrid > stopTGrid)
+                break;
+            if (child.TGrid <= startTGrid)
+                continue;
+
+            ConnectableChildObjectBase cpChild = child is ConnectableEndObject ? 
+                targetLaneStart.CreateEndObject() :
+                targetLaneStart.CreateNextObject();
+            
+            CopyChild(child, cpChild);
+            targetLaneStart.AddChildObject(cpChild);
+        }
+
+        genList.Add(targetLaneStart);
+    }
+}
+
+targetEditor.UndoRedoManager.ExecuteAction(LambdaUndoAction.Create("[脚本]轨道描边", () =>
+{
+    targetEditor.Fumen.AddObjects(genList);
+    targetEditor.Redraw(RedrawTarget.OngekiObjects);
+}, () =>
+{
+    targetEditor.Fumen.RemoveObjects(genList);
+    targetEditor.Redraw(RedrawTarget.OngekiObjects);
+}));
