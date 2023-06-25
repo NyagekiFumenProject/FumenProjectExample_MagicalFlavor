@@ -12,11 +12,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 var sourceLaneGroupIds = new[] { 82, 83 };
-var genLaneType = LaneType.Colorful;
-var colorId = ColorIdConst.Yuzu;
+var genLaneType = LaneType.Colorful;q
+var colorId = ColorIdConst.Alice;
 var brightness = 3;
-var startTGrid = new TGrid(36, 960);
-var stopTGrid = new TGrid(37, 0);
+var startTGrid = new TGrid(39, 960);
+var stopTGrid = new TGrid(40, 0);
 var xGridOffsets = new GridOffset[] {
         new(-1, 0),
         new(0, 0),
@@ -103,9 +103,7 @@ foreach (var sourceLaneGroupId in sourceLaneGroupIds)
 targetEditor.UndoRedoManager.ExecuteAction(LambdaUndoAction.Create("[脚本]轨道描边", () =>
 {
     targetEditor.Fumen.AddObjects(genList);
-    targetEditor.Redraw(RedrawTarget.OngekiObjects);
 }, () =>
 {
     targetEditor.Fumen.RemoveObjects(genList);
-    targetEditor.Redraw(RedrawTarget.OngekiObjects);
 }));
