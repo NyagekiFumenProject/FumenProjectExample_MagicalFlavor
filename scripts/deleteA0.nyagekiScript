@@ -1,0 +1,24 @@
+//学习本脚本语言: C# : https://dotnet.microsoft.com/en-us/learn/csharp
+//学习本脚本格式: C# Script : https://docs.microsoft.com/en-us/archive/msdn-magazine/2016/january/essential-net-csharp-scripting
+
+// 如何使用? 编写脚本代码 -> 编译脚本 -> 钦定目标编辑器 -> 执行脚本！
+
+using Caliburn.Micro;
+using OngekiFumenEditor.Base;
+using OngekiFumenEditor.Base.OngekiObjects;
+using OngekiFumenEditor.Modules.FumenVisualEditor.Base;
+using OngekiFumenEditor.Modules.FumenVisualEditor.Kernel;
+using OngekiFumenEditor.Utils;
+using OngekiFumenEditorPlugins.EditorScriptExecutor.Scripts;
+using System.Linq;
+using System.Collections.Generic;
+
+Log.LogInfo("这是脚本输出，你可以在质朴器程序的输出栏看到本消息");
+Log.LogDebug("这是调试消息输出，只能在日志文件中看到。");
+
+//获取编辑器目标对象
+var targetEditor = ScriptArgs.TargetEditor;
+if (targetEditor is null)
+    return;
+
+targetEditor.Fumen.RemoveObjects(targetEditor.Fumen.Bullets.Where(x => x.ReferenceBulletPallete.StrID == "A0").ToArray());
